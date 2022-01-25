@@ -1,5 +1,6 @@
 import { Button, Container, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import Logo from "components/common/Logo";
 import WhiteButton from "components/common/WhiteButton";
 import Link from "next/link";
 import React from "react";
@@ -28,17 +29,10 @@ export default function Home() {
             }}
           >
             <Box className="flex flex-wrap flex-row justify-between p-6">
-              <Typography
-                variant="h4"
-                component="h4"
-                color="error"
-                className="font-bold"
-              >
-                NETFLIX
-              </Typography>
+              <Logo size="h4" component="h4" style="font-bold" />
               <Box className="flex flex-row gap-x-8">
                 <WhiteButton>한국어</WhiteButton>
-                <Link href="/asd">
+                <Link href="/login">
                   <Button
                     variant="contained"
                     color="error"

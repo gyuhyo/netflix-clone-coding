@@ -1,4 +1,4 @@
-package com.tutorial.jwtsecurity.controller.dto;
+package com.example.backend.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,6 @@
-package com.tutorial.jwtsecurity.service;
+package com.example.backend.jwt;
 
-import com.tutorial.jwtsecurity.entity.Member;
-import com.tutorial.jwtsecurity.repository.MemberRepository;
+import com.example.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,23 +17,23 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return memberRepository.findByEmail(username)
+        return userRepository.findByEmail(username)
                 .map(this::createUserDetails)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
     }
 
     // DB 에 User 값이 존재한다면 UserDetails 객체로 만들어서 리턴
-    private UserDetails createUserDetails(Member member) {
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getAuthority().toString());
+    private UserDetails createUserDetails(com.example.backend.entity.User user) {
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority().toString());
 
         return new User(
-                String.valueOf(member.getId()),
-                member.getPassword(),
+                String.valueOf(user.getUserId()),
+                user.getPassword(),
                 Collections.singleton(grantedAuthority)
         );
     }

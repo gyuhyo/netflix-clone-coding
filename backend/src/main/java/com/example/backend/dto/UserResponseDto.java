@@ -1,17 +1,17 @@
-package com.example.dto;
+package com.example.backend.dto;
 
 import com.example.backend.entity.Authority;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.example.backend.entity.User;
+import lombok.*;
 
 @Getter
 @Setter
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserResponseDto {
     private String email;
 
-    private String password;
-
-    private Authority authority;
+    public static UserResponseDto of(User user) {
+        return new UserResponseDto(user.getEmail());
+    }
 }
